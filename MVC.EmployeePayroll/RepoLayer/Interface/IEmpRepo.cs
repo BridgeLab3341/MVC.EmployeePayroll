@@ -11,6 +11,6 @@ namespace RepoLayer.Interface
         public IEnumerable<EmployeeModel> GetAllEmployees();
         public EmployeeModel Update(EmployeeModel employee);
         public EmployeeModel GetEmployeeData(int? id);
-        public void DeleteEmployee(int? id);
+        public void DeleteEmployee(int? employeeid);
     }
 }

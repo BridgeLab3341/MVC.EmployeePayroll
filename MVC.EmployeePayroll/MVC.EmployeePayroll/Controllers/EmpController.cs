@@ -82,13 +82,17 @@ namespace MVC.EmployeePayroll.Controllers
             return View(employee);
         }
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? employeeid)
         {
-            if (id == null)
+            if (employeeid == null)
             {
                 return NotFound();
             }
-            var employee = empBusiness.GetEmployeeData(id);
+            var result = empBusiness.GetAllEmployees();
+            
+            var employee = result.FirstOrDefault(x => x.EmployeeId == employeeid);  
+            
+            //var employee = empBusiness.GetEmployeeData(employeeid);
 
             if (employee == null)
             {
@@ -96,13 +100,13 @@ namespace MVC.EmployeePayroll.Controllers
             }
             return View(employee);
         }
-        [HttpPost, ActionName("Delete")]
+        [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int? id)
+        public IActionResult DeleteConfirm(int employeeid)
         {
             try
             {
-                empBusiness.DeleteEmployee(id);
+                empBusiness.DeleteEmployee(employeeid);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

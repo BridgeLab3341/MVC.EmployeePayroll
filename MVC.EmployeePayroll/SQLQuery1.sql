@@ -90,7 +90,7 @@ Create or Alter Procedure SPDeleteEmployee(
 As
 Begin
 Begin Try
-Select * from EmployeeManagement where EmployeeId=@EmployeeId;
+Delete from EmployeeManagement where EmployeeId=@EmployeeId;
 End Try
 Begin Catch
 Select ERROR_MESSAGE() as ErrorMessage;

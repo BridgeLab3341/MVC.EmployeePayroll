@@ -60,6 +60,7 @@ namespace RepoLayer.Service
                     while(dataReader.Read())
                     {
                         EmployeeModel model = new EmployeeModel();
+                        model.EmployeeId = dataReader.GetInt32(0);
                         model.Name = dataReader.GetString(1);
                         model.ProfileImage = dataReader.GetString(2);
                         model.Gender = dataReader.GetString(3);
@@ -103,11 +104,11 @@ namespace RepoLayer.Service
                 throw ex;
             }
         }
-        public EmployeeModel GetEmployeeData(int? id)
+        public EmployeeModel GetEmployeeData(int? employeeid)
         {
             try
             {
-                string query= "SELECT * FROM EmployeeManagement WHERE EmployeeID= " + id;
+                string query= "SELECT * FROM EmployeeManagement WHERE EmployeeID= " + employeeid;
                 EmployeeModel employee = new EmployeeModel();
                 SqlConnection connection = new SqlConnection(ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand(query, connection);
