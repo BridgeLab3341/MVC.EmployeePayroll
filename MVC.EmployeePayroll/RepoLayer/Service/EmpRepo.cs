@@ -78,5 +78,75 @@ namespace RepoLayer.Service
                 throw;
             }
         }
+        public EmployeeModel Update(EmployeeModel employee)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand("SPUpdateEmployeeDeatils", connection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId);
+                sqlCommand.Parameters.AddWithValue("@Name", employee.Name);
+                sqlCommand.Parameters.AddWithValue("@ProfileImage", employee.ProfileImage);
+                sqlCommand.Parameters.AddWithValue("@Gender", employee.Gender);
+                sqlCommand.Parameters.AddWithValue("@Department", employee.Department);
+                sqlCommand.Parameters.AddWithValue("@Salary", employee.Salary);
+                sqlCommand.Parameters.AddWithValue("@StartDate", employee.StartDate);
+                sqlCommand.Parameters.AddWithValue("@Notes", employee.Notes);
+                connection.Open();
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public EmployeeModel GetEmployeeData(int? id)
+        {
+            try
+            {
+                string query= "SELECT * FROM EmployeeManagement WHERE EmployeeID= " + id;
+                EmployeeModel employee = new EmployeeModel();
+                SqlConnection connection = new SqlConnection(ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    employee.EmployeeId = Convert.ToInt32(reader["EmployeeID"]);
+                    employee.Name = reader["Name"].ToString();
+                    employee.ProfileImage = reader["ProfileImage"].ToString();
+                    employee.Gender = reader["Gender"].ToString();
+                    employee.Department = reader["Department"].ToString();
+                    employee.Salary = Convert.ToDecimal(reader["Salary"].ToString());
+                    employee.StartDate = Convert.ToDateTime(reader["DateTime"].ToString());
+                    employee.Notes = reader["Notes"].ToString();
+                }
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void DeleteEmployee(EmployeeModel model)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(ConnectionString);
+                SqlCommand sqlCommand = new SqlCommand("SPDeleteEmployee", connection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("EmployeeId", model.EmployeeId);
+                connection.Open();
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -36,5 +36,38 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
+        public EmployeeModel Update(EmployeeModel employee)
+        {
+            try
+            {
+                return this.empRepo.Update(employee);
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+        }
+        public EmployeeModel GetEmployeeData(int? id)
+        {
+            try
+            {
+                return this.empRepo.GetEmployeeData(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteEmployee(EmployeeModel model)
+        {
+            try
+            {
+                this.empRepo.DeleteEmployee(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

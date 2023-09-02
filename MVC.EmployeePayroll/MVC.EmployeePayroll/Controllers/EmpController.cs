@@ -51,5 +51,75 @@ namespace MVC.EmployeePayroll.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public IActionResult Edit(int employeeid)
+        {
+            if (employeeid == null)
+            {
+                return NotFound();
+            }
+            var employee = empBusiness.GetEmployeeData(employeeid);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int employeeId, [Bind] EmployeeModel employee)
+        {
+            if (employeeId != employee.EmployeeId)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                empBusiness.Update(employee);
+                return RedirectToAction("Index");
+            }
+            return View(employee);
+        }
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var employee = empBusiness.GetEmployeeData(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var employee = empBusiness.GetEmployeeData(id);
+
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+
+                empBusiness.DeleteEmployee(employee);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
