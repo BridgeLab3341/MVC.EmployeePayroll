@@ -58,11 +58,11 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-        public void DeleteEmployee(EmployeeModel model)
+        public void DeleteEmployee(int? id)
         {
             try
             {
-                this.empRepo.DeleteEmployee(model);
+                this.empRepo.DeleteEmployee(id);
             }
             catch (Exception)
             {

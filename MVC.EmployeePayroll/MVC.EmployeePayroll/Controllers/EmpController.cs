@@ -97,23 +97,12 @@ namespace MVC.EmployeePayroll.Controllers
             return View(employee);
         }
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var employee = empBusiness.GetEmployeeData(id);
-
-                if (employee == null)
-                {
-                    return NotFound();
-                }
-
-                empBusiness.DeleteEmployee(employee);
+                empBusiness.DeleteEmployee(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

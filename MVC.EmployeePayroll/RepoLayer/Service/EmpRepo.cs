@@ -131,14 +131,14 @@ namespace RepoLayer.Service
                 throw ex;
             }
         }
-        public void DeleteEmployee(EmployeeModel model)
+        public void DeleteEmployee(int? id)
         {
             try
             {
                 SqlConnection connection = new SqlConnection(ConnectionString);
                 SqlCommand sqlCommand = new SqlCommand("SPDeleteEmployee", connection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("EmployeeId", model.EmployeeId);
+                sqlCommand.Parameters.AddWithValue("@EmployeeId", id);
                 connection.Open();
                 sqlCommand.ExecuteNonQuery();
                 connection.Close();

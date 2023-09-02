@@ -12,7 +12,7 @@ namespace BusinessLayer.Interface
         public string Create(EmployeeModel employee);
         public EmployeeModel Update(EmployeeModel employee);
         public EmployeeModel GetEmployeeData(int? id);
-        public void DeleteEmployee(EmployeeModel model);
+        public void DeleteEmployee(int? id);
 
     }
 }
