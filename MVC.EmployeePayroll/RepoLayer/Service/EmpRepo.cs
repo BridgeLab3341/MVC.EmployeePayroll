@@ -104,34 +104,34 @@ namespace RepoLayer.Service
                 throw ex;
             }
         }
-        public EmployeeModel GetEmployeeData(int? employeeid)
-        {
-            try
-            {
-                string query= "SELECT * FROM EmployeeManagement WHERE EmployeeID= " + employeeid;
-                EmployeeModel employee = new EmployeeModel();
-                SqlConnection connection = new SqlConnection(ConnectionString);
-                SqlCommand sqlCommand = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-                while (reader.Read())
-                {
-                    employee.EmployeeId = Convert.ToInt32(reader["EmployeeID"]);
-                    employee.Name = reader["Name"].ToString();
-                    employee.ProfileImage = reader["ProfileImage"].ToString();
-                    employee.Gender = reader["Gender"].ToString();
-                    employee.Department = reader["Department"].ToString();
-                    employee.Salary = Convert.ToDecimal(reader["Salary"].ToString());
-                    employee.StartDate = Convert.ToDateTime(reader["DateTime"].ToString());
-                    employee.Notes = reader["Notes"].ToString();
-                }
-                return employee;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public EmployeeModel GetEmployeeData(int? employeeid)
+        //{
+        //    try
+        //    {
+        //        string query= "SELECT * FROM EmployeeManagement WHERE EmployeeID= " + employeeid;
+        //        EmployeeModel employee = new EmployeeModel();
+        //        SqlConnection connection = new SqlConnection(ConnectionString);
+        //        SqlCommand sqlCommand = new SqlCommand(query, connection);
+        //        connection.Open();
+        //        SqlDataReader reader = sqlCommand.ExecuteReader();
+        //        while (reader.Read())
+        //        {
+        //            employee.EmployeeId = Convert.ToInt32(reader["EmployeeID"]);
+        //            employee.Name = reader["Name"].ToString();
+        //            employee.ProfileImage = reader["ProfileImage"].ToString();
+        //            employee.Gender = reader["Gender"].ToString();
+        //            employee.Department = reader["Department"].ToString();
+        //            employee.Salary = Convert.ToDecimal(reader["Salary"].ToString());
+        //            employee.StartDate = DateTime.Parse(reader["DateTime"].ToString());
+        //            employee.Notes = reader["Notes"].ToString();
+        //        }
+        //        return employee;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         public void DeleteEmployee(int? id)
         {
             try

@@ -28,7 +28,7 @@ namespace MVC.EmployeePayroll.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind] EmployeeModel employee)
+        public IActionResult Create(EmployeeModel employee)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,9 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 return NotFound();
             }
-            var employee = empBusiness.GetEmployeeData(employeeid);
+            var result = empBusiness.GetAllEmployees();
+            var employee=result.FirstOrDefault(x=>x.EmployeeId == employeeid);
+            //var employee = empBusiness.GetEmployeeData(employeeid);
 
             if (employee == null)
             {
@@ -68,7 +70,7 @@ namespace MVC.EmployeePayroll.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int employeeId, [Bind] EmployeeModel employee)
+        public IActionResult Edit(int employeeId, EmployeeModel employee)
         {
             if (employeeId != employee.EmployeeId)
             {
@@ -113,6 +115,22 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 throw ex;
             }
+        }
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public IActionResult Details(int? employeeid)
+        {
+            if(employeeid == null)
+            {
+                return NotFound();
+            }
+            var result= empBusiness.GetAllEmployees();
+            var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeid);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
         }
     }
 }

@@ -47,17 +47,17 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-        public EmployeeModel GetEmployeeData(int? id)
-        {
-            try
-            {
-                return this.empRepo.GetEmployeeData(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public EmployeeModel GetEmployeeData(int? id)
+        //{
+        //    try
+        //    {
+        //        return this.empRepo.GetEmployeeData(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
         public void DeleteEmployee(int? employeeid)
         {
             try
