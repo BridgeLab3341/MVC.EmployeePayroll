@@ -16,9 +16,16 @@ namespace MVC.EmployeePayroll.Controllers
         }
         public IActionResult Index()
         {
-            //List<EmployeeModel> models = new List<EmployeeModel>();
-            var models = empBusiness.GetAllEmployees();
-            return View(models);
+            try
+            {
+                //List<EmployeeModel> models = new List<EmployeeModel>();
+                var models = empBusiness.GetAllEmployees();
+                return View(models);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         [HttpGet]
         public IActionResult Create()
@@ -30,85 +37,113 @@ namespace MVC.EmployeePayroll.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeModel employee)
         {
-            if (ModelState.IsValid)
-            {
-                empBusiness.Create(employee);
-                return RedirectToAction("Index");
-            }
-            return View(employee);
-        }
-        [HttpGet]
-        public IActionResult GetAllEmployees()
-        {
             try
             {
-                List<EmployeeModel> models = new List<EmployeeModel>();
-                var result = empBusiness.GetAllEmployees();
-                return View(result);
+                if (ModelState.IsValid)
+                {
+                    empBusiness.Create(employee);
+                    return RedirectToAction("Index");
+                }
+                return View(employee);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
+        //[HttpGet]
+        //public IActionResult GetAllEmployees()
+        //{
+        //    try
+        //    {
+        //        List<EmployeeModel> models = new List<EmployeeModel>();
+        //        var result = empBusiness.GetAllEmployees();
+        //        return View(result);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
         [HttpGet]
         public IActionResult Edit(int employeeid)
         {
-            if (employeeid == null)
+            try
             {
-                return NotFound();
-            }
-            var result = empBusiness.GetAllEmployees();
-            var employee=result.FirstOrDefault(x=>x.EmployeeId == employeeid);
-            //var employee = empBusiness.GetEmployeeData(employeeid);
+                if (employeeid == null)
+                {
+                    return NotFound();
+                }
+                var result = empBusiness.GetAllEmployees();
+                var employee = result.FirstOrDefault(x => x.EmployeeId == employeeid);
+                //var employee = empBusiness.GetEmployeeData(employeeid);
 
-            if (employee == null)
-            {
-                return NotFound();
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                return View(employee);
             }
-            return View(employee);
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int employeeId, EmployeeModel employee)
         {
-            if (employeeId != employee.EmployeeId)
+            try
             {
-                return NotFound();
+                if (employeeId != employee.EmployeeId)
+                {
+                    return NotFound();
+                }
+                if (ModelState.IsValid)
+                {
+                    empBusiness.Update(employee);
+                    return RedirectToAction("Index");
+                }
+                return View(employee);
             }
-            if (ModelState.IsValid)
+            catch (Exception ex)
             {
-                empBusiness.Update(employee);
-                return RedirectToAction("Index");
+                throw ex;
             }
-            return View(employee);
         }
         [HttpGet]
-        public IActionResult Delete(int? employeeid)
-        {
-            if (employeeid == null)
-            {
-                return NotFound();
-            }
-            var result = empBusiness.GetAllEmployees();
-            
-            var employee = result.FirstOrDefault(x => x.EmployeeId == employeeid);  
-            
-            //var employee = empBusiness.GetEmployeeData(employeeid);
-
-            if (employee == null)
-            {
-                return NotFound();
-            }
-            return View(employee);
-        }
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirm(int employeeid)
+        public IActionResult Delete(int? employeeId)
         {
             try
             {
-                empBusiness.DeleteEmployee(employeeid);
+                if (employeeId == null)
+                {
+                    return NotFound();
+                }
+                var result = empBusiness.GetAllEmployees();
+
+                var employee = result.FirstOrDefault(x => x.EmployeeId == employeeId);
+
+                //var employee = empBusiness.GetEmployeeData(employeeid);
+
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                return View(employee);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirm(int employeeId)
+        {
+            try
+            {
+                empBusiness.DeleteEmployee(employeeId);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -118,19 +153,19 @@ namespace MVC.EmployeePayroll.Controllers
         }
         [HttpGet]
         [ValidateAntiForgeryToken]
-        public IActionResult Details(int? employeeid)
+        public IActionResult Details(int? employeeId)
         {
-            if(employeeid == null)
+            if(employeeId == null)
             {
                 return NotFound();
             }
             var result= empBusiness.GetAllEmployees();
-            var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeid);
+            var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeId);
             if (employee == null)
             {
                 return NotFound();
             }
-            return View(employee);
+            return View();
         }
     }
 }
