@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new {employeeId= item.EmployeeId} ) |
+                    @Html.ActionLink("Edit", "Edit", new {item.EmployeeId} ) |
                     @Html.ActionLink("Details", "Details",new {employeeId= item.EmployeeId}) |
                     @Html.ActionLink("Delete", "Delete", new {employeeId= item.EmployeeId})
             </td>

@@ -151,8 +151,7 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult Details(int? employeeId)
+        public IActionResult Details(int employeeId)
         {
             if(employeeId == null)
             {
@@ -165,7 +164,7 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 return NotFound();
             }
-            return View();
+            return View(employee);
         }
     }
 }
