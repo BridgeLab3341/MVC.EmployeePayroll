@@ -120,11 +120,11 @@ namespace MVC.EmployeePayroll.Controllers
                 {
                     return NotFound();
                 }
-                var result = empBusiness.GetAllEmployees();
+                //var result = empBusiness.GetAllEmployees();
 
-                var employee = result.FirstOrDefault(x => x.EmployeeId == employeeId);
+                //var employee = result.FirstOrDefault(x => x.EmployeeId == employeeId);
 
-                //var employee = empBusiness.GetEmployeeData(employeeid);
+                EmployeeModel employee = empBusiness.GetEmployeeData(employeeId);
 
                 if (employee == null)
                 {
@@ -137,12 +137,11 @@ namespace MVC.EmployeePayroll.Controllers
                 throw ex;
             }
         }
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirm(int employeeId)
+        [HttpPost,ActionName("Delete")] 
+        public IActionResult DeleteConfirm(int? employeeId)
         {
             try
-            {
+            {              
                 empBusiness.DeleteEmployee(employeeId);
                 return RedirectToAction("Index");
             }
@@ -159,8 +158,9 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 return NotFound();
             }
-            var result= empBusiness.GetAllEmployees();
-            var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeId);
+            //var result= empBusiness.GetAllEmployees();
+            //var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeId);
+            var employee= empBusiness.GetEmployeeData(employeeId);
             if (employee == null)
             {
                 return NotFound();
