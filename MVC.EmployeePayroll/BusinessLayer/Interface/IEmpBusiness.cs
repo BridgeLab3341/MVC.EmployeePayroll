@@ -13,6 +13,6 @@ namespace BusinessLayer.Interface
         public EmployeeModel Update(EmployeeModel employee);
         public EmployeeModel GetEmployeeData(int? employeeId);
         public void DeleteEmployee(int? employeeId);
-
+        public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel);
     }
 }

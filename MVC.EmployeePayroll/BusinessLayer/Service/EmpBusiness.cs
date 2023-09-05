@@ -64,9 +64,20 @@ namespace BusinessLayer.Service
             {
                 this.empRepo.DeleteEmployee(employeeId);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
+            }
+        }
+        public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
+        {
+            try
+            {
+                return this.empRepo.LoginEmployee(loginModel);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
         }
     }

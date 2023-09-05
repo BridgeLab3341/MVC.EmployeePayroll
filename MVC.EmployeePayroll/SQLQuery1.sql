@@ -97,3 +97,15 @@ Select ERROR_MESSAGE() as ErrorMessage;
 End Catch;
 End
 
+Create or Alter Procedure SPEmployeeLogin(
+@EmployeeId Int,
+@Name varchar(50))
+As
+Begin
+Begin Try
+Select Name from EmployeeManagement where EmployeeId=@EmployeeId;
+End Try
+Begin catch
+Select ERROR_MESSAGE() as ErrorMessage;
+End catch;
+End

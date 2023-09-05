@@ -1,0 +1,42 @@
+﻿.container {
+    width: 100%;
+    margin-right: inherit;
+    margin-left: inherit;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-content: center;
+}
+.row {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #bbe090;
+}
+.pb-3, .py-3 {
+    padding-bottom: 1rem !important;
+    width: 50%;
+}
+.h1, h1 {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.h4, h4 {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}

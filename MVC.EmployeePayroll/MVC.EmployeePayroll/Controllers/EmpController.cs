@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -169,6 +170,76 @@ namespace MVC.EmployeePayroll.Controllers
                 return NotFound();
             }
             return View(employee);
+        }
+        [HttpGet]
+        [Route("Emp/Login")]
+        public IActionResult Login()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                    return View();
+                
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public IActionResult Login(EmployeeLoginModel login)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    var result = this.empBusiness.GetAllEmployees();
+                    var employee = result.FirstOrDefault(x => x.EmployeeId == login.EmployeeId);
+
+                    HttpContext.Session.SetInt32("EmployeeId", employee.EmployeeId);
+
+                    if (employee != null)
+                    {
+                        return RedirectToAction("Profile");
+                    }
+                    else
+                    { 
+                        return RedirectToAction("Login");
+                    }
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("Emp/Profile")]
+        public IActionResult Profile()
+        {
+            try 
+            { 
+                int EmpId = (int)HttpContext.Session.GetInt32("EmployeeId");
+
+                var result = this.empBusiness.GetAllEmployees();
+                var employee = result.FirstOrDefault(x => x.EmployeeId == EmpId);
+
+                if (employee != null)
+                {
+                    return View(employee);
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
