@@ -28,6 +28,7 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpGet]
+        [Route("Emp/AddEmp")]
         public IActionResult Create()
         {
             return View();
@@ -66,6 +67,7 @@ namespace MVC.EmployeePayroll.Controllers
         //    }
         //}
         [HttpGet]
+        [Route("Emp/Update")]
         public IActionResult Edit(int employeeid)
         {
             try
@@ -112,6 +114,7 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpGet]
+        [Route("Emp/Remove")]
         public IActionResult Delete(int? employeeId)
         {
             try
@@ -137,7 +140,7 @@ namespace MVC.EmployeePayroll.Controllers
                 throw ex;
             }
         }
-        [HttpPost,ActionName("Delete")] 
+        [HttpPost,ActionName("Delete")]
         public IActionResult DeleteConfirm(int? employeeId)
         {
             try
@@ -151,6 +154,7 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpGet]
+        [Route("Emp/UserData")]
         public IActionResult Details(int employeeId)
         {
             if(employeeId == null)

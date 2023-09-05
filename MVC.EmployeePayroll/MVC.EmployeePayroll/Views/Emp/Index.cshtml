@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<CommonLayer.EmployeeModel>
 
 @{
+    
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>List of Employees</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    <div class="createlink">
+        <a asp-action="Create">Create New</a>
+    </div>
 </p>
 <table class="table">
-    <thead>
+    <thead class="tablelink">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -61,10 +63,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new {item.EmployeeId} ) |
-                    @Html.ActionLink("Details", "Details",new {employeeId= item.EmployeeId}) |
-                    @Html.ActionLink("Delete", "Delete", new {employeeId= item.EmployeeId})
+            <td class="Options">
+                <span class="EditId">
+                        @Html.ActionLink("Edit", "Edit", new {item.EmployeeId} ) 
+                    </span> | &nbsp;
+                <span class="Deatails">
+                        @Html.ActionLink("Details", "Details",new {employeeId= item.EmployeeId}) 
+                    </span> | &nbsp;
+                <span class="Delete">
+                        @Html.ActionLink("Delete", "Delete", new {employeeId= item.EmployeeId})
+                </span>
             </td>
         </tr>
 }

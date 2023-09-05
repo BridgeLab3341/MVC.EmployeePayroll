@@ -1,0 +1,37 @@
+﻿body {
+    width:100%;
+    height:70%;
+}
+.control-label {
+    font-weight: bold;
+}
+.form-control {
+    width: 100%;
+}
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+.row {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: cadetblue;
+    color: black;
+}
+.form-align{
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    align-content:center;
+    justify-content:center;
+    align-items:center;
+}
+a {
+    color: currentcolor;
+    font-size: medium;
+}
+
+

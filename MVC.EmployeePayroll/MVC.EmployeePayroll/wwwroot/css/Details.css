@@ -1,0 +1,23 @@
+﻿.row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    background-color: azure;
+}
+a {
+    color: #0e0e0f;
+    font-size: medium;
+    margin: 2px;
+    border-radius: 2px;
+}
+.detailslink {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
