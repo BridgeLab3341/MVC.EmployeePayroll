@@ -1,0 +1,30 @@
+﻿main.pb-3 {
+    display: flex;
+    align-content: stretch;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 100px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    background-color: aliceblue;
+}
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 106px;
+}
+form {
+    padding-left: 105px;
+}

@@ -1,13 +1,17 @@
 ﻿.row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+    align-items: stretch;
+    background-color: #8edfdf;
     align-content: center;
-    align-items: center;
-    justify-items: center;
-    background-color: azure;
+    justify-content: center;
+    padding-right:9px;
+    width:fit-content;
+    height:50%;
+    padding-left:12px;
 }
-a {
+a { 
     color: #0e0e0f;
     font-size: medium;
     margin: 2px;
@@ -20,4 +24,20 @@ a {
     align-content: center;
     justify-content: center;
     align-items: center;
+    background-color:aqua;
+}
+.h1, h1 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.h4, h4 {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    padding-left: 464px;
 }
