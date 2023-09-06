@@ -69,16 +69,16 @@ namespace BusinessLayer.Service
                 throw ex;
             }
         }
-        public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
-        {
-            try
-            {
-                return this.empRepo.LoginEmployee(loginModel);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
+        //{
+        //    try
+        //    {
+        //        return this.empRepo.LoginEmployee(loginModel);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }

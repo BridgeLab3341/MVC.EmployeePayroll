@@ -21,7 +21,8 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 //List<EmployeeModel> models = new List<EmployeeModel>();
                 var models = empBusiness.GetAllEmployees();
-                return View(models);
+                 return View(models);
+                
             }
             catch (Exception ex)
             {
@@ -36,6 +37,7 @@ namespace MVC.EmployeePayroll.Controllers
         }
 
         [HttpPost]
+        [Route("Emp/AddEmp")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeModel employee)
         {
@@ -93,6 +95,7 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpPost]
+        [Route("Emp/Update")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int employeeId, EmployeeModel employee)
         {
@@ -129,7 +132,7 @@ namespace MVC.EmployeePayroll.Controllers
                 //var employee = result.FirstOrDefault(x => x.EmployeeId == employeeId);
 
                 EmployeeModel employee = empBusiness.GetEmployeeData(employeeId);
-
+                ViewBag.Message = "Data Deleted Successfully".ToString();
                 if (employee == null)
                 {
                     return NotFound();
@@ -142,11 +145,13 @@ namespace MVC.EmployeePayroll.Controllers
             }
         }
         [HttpPost,ActionName("Delete")]
+        [Route("Emp/Remove")]
         public IActionResult DeleteConfirm(int? employeeId)
         {
             try
             {              
                 empBusiness.DeleteEmployee(employeeId);
+                ViewBag.Message = "Data Deleted Successfully".ToString();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -165,6 +170,7 @@ namespace MVC.EmployeePayroll.Controllers
             //var result= empBusiness.GetAllEmployees();
             //var employee = result.FirstOrDefault(x=>x.EmployeeId == employeeId);
             var employee= empBusiness.GetEmployeeData(employeeId);
+            ViewBag.Message = "Data Fetched Successfully".ToString();
             if (employee == null)
             {
                 return NotFound();
@@ -177,9 +183,9 @@ namespace MVC.EmployeePayroll.Controllers
         {
             try
             {
-                HttpContext.Session.Clear();
-                    return View();
+                // HttpContext.Session.Clear();
                 
+                return View();                
             }
             catch(Exception ex)
             {
@@ -195,11 +201,10 @@ namespace MVC.EmployeePayroll.Controllers
                 {
                     var result = this.empBusiness.GetAllEmployees();
                     var employee = result.FirstOrDefault(x => x.EmployeeId == login.EmployeeId);
-
                     HttpContext.Session.SetInt32("EmployeeId", employee.EmployeeId);
-
                     if (employee != null)
                     {
+                        
                         return RedirectToAction("Profile");
                     }
                     else
@@ -222,10 +227,9 @@ namespace MVC.EmployeePayroll.Controllers
             try 
             { 
                 int EmpId = (int)HttpContext.Session.GetInt32("EmployeeId");
-
                 var result = this.empBusiness.GetAllEmployees();
                 var employee = result.FirstOrDefault(x => x.EmployeeId == EmpId);
-
+                ViewBag.Message = "Login Successfully".ToString();
                 if (employee != null)
                 {
                     return View(employee);
@@ -237,6 +241,47 @@ namespace MVC.EmployeePayroll.Controllers
 
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet]
+        [Route("Emp/Temp")]
+        public IActionResult Temperary()
+        {
+            try
+            {
+                return View();
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("Emp/Temp")]
+        public IActionResult TemperaryData()
+        {
+            try
+            {
+                var result = empBusiness.GetAllEmployees();
+                //List<EmployeeModel> model = new List<EmployeeModel>();
+                foreach (EmployeeModel data in result)
+                {
+                    TempData["EmployeeId"] = data.EmployeeId;
+                    TempData["ProfileImage"] = data.ProfileImage;
+                    TempData["Name"] = data.Name;
+                    TempData["Gender"] = data.Gender;
+                    TempData["Department"] = data.Department;
+                    TempData["Salary"] = data.Salary;
+                    TempData["StartDate"] = data.StartDate;
+                    TempData["Notes"] = data.Notes;
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            
+            catch(Exception ex)
             {
                 throw ex;
             }

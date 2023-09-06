@@ -149,45 +149,45 @@ namespace RepoLayer.Service
                 throw ex;
             }
         }
-        public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
-        {
-            try
-            {
-                EmployeeModel employeeModel = new EmployeeModel();
-                SqlConnection connection = new SqlConnection(ConnectionString);
-                SqlCommand sqlCommand = new SqlCommand("SPEmployeeLogin", connection);
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                connection.Open();
-                sqlCommand.Parameters.AddWithValue("@EmployeeId", loginModel.EmployeeId);
-                sqlCommand.Parameters.AddWithValue("@Name", loginModel.EmployeeId);
-                var returnparameter = sqlCommand.Parameters.Add("@Result", SqlDbType.Int);
-                returnparameter.Direction = ParameterDirection.ReturnValue;
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                {
-                    var result = returnparameter.Value;
-                    if (reader.HasRows && reader.Read())
-                    {
-                        employeeModel = new EmployeeModel();
-                        employeeModel.EmployeeId =Convert.ToInt32(reader["EmployeeId"]);
-                        employeeModel.Name = reader["Name"].ToString();
-                        employeeModel.ProfileImage = reader["ProfileImage"].ToString();
-                        employeeModel.Gender = reader["Gender"].ToString();
-                        employeeModel.Department = reader["Department"].ToString();
-                        employeeModel.Salary = Convert.ToDecimal(reader["Salary"].ToString());
-                        employeeModel.StartDate = reader.GetDateTime(6);
-                        employeeModel.Notes = reader["Notes"].ToString();
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                return employeeModel;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
+        //{
+        //    try
+        //    {
+        //        EmployeeModel employeeModel = new EmployeeModel();
+        //        SqlConnection connection = new SqlConnection(ConnectionString);
+        //        SqlCommand sqlCommand = new SqlCommand("SPEmployeeLogin", connection);
+        //        sqlCommand.CommandType = CommandType.StoredProcedure;
+        //        connection.Open();
+        //        sqlCommand.Parameters.AddWithValue("@EmployeeId", loginModel.EmployeeId);
+        //        sqlCommand.Parameters.AddWithValue("@Name", loginModel.EmployeeId);
+        //        var returnparameter = sqlCommand.Parameters.Add("@Result", SqlDbType.Int);
+        //        returnparameter.Direction = ParameterDirection.ReturnValue;
+        //        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+        //        {
+        //            var result = returnparameter.Value;
+        //            if (reader.HasRows && reader.Read())
+        //            {
+        //                employeeModel = new EmployeeModel();
+        //                employeeModel.EmployeeId =Convert.ToInt32(reader["EmployeeId"]);
+        //                employeeModel.Name = reader["Name"].ToString();
+        //                employeeModel.ProfileImage = reader["ProfileImage"].ToString();
+        //                employeeModel.Gender = reader["Gender"].ToString();
+        //                employeeModel.Department = reader["Department"].ToString();
+        //                employeeModel.Salary = Convert.ToDecimal(reader["Salary"].ToString());
+        //                employeeModel.StartDate = reader.GetDateTime(6);
+        //                employeeModel.Notes = reader["Notes"].ToString();
+        //            }
+        //            else
+        //            {
+        //                return null;
+        //            }
+        //        }
+        //        return employeeModel;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }
