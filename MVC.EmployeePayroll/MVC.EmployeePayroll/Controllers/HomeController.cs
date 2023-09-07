@@ -36,10 +36,28 @@ namespace MVC.EmployeePayroll.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public IActionResult Action2()
+        [HttpGet]
+        public IActionResult TempProfile()
         {
-            return View();
+            try
+            {
+                // Retrieve employee data from TempData
+                var result = TempData["Employees"] as List<EmployeeModel>;
+
+                if (result != null && result.Count > 0)
+                {
+                    return View(result);
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions here
+                return View("Error");
+            }
         }
     }
 }

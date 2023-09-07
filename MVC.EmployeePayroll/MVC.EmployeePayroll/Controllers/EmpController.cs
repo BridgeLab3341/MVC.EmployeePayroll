@@ -253,12 +253,12 @@ namespace MVC.EmployeePayroll.Controllers
             {
                 return View();
             }
-            catch(Exception)
+            catch (Exception ex)
             {
-                throw;
+                // Handle exceptions here
+                return View("Error");
             }
         }
-
         [HttpPost]
         [Route("Emp/Temp")]
         public IActionResult TemperaryData()
@@ -266,25 +266,25 @@ namespace MVC.EmployeePayroll.Controllers
             try
             {
                 var result = empBusiness.GetAllEmployees();
-                //List<EmployeeModel> model = new List<EmployeeModel>();
-                foreach (EmployeeModel data in result)
+
+                // Store employee data in TempData
+                TempData["Employees"] = result;
+
+                if (result != null)
                 {
-                    TempData["EmployeeId"] = data.EmployeeId;
-                    TempData["ProfileImage"] = data.ProfileImage;
-                    TempData["Name"] = data.Name;
-                    TempData["Gender"] = data.Gender;
-                    TempData["Department"] = data.Department;
-                    TempData["Salary"] = data.Salary;
-                    TempData["StartDate"] = data.StartDate;
-                    TempData["Notes"] = data.Notes;
+                    return RedirectToAction("TempProfile", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                else
+                {
+                    return RedirectToAction("Login", "Home");
+                }
             }
-            
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                // Handle exceptions here
+                return View("Error");
             }
         }
+
     }
 }
