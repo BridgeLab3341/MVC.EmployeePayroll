@@ -24,9 +24,9 @@ namespace MVC.EmployeePayroll.Controllers
                  return View(models);
                 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Fetching Index View");
             }
         }
         [HttpGet]
@@ -50,9 +50,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
                 return View(employee);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Adding Employee Data");
             }
         }
         //[HttpGet]
@@ -89,9 +89,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
                 return View(employee);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Updating Employee Data");
             }
         }
         [HttpPost]
@@ -112,9 +112,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
                 return View(employee);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Updating Employee Data");
             }
         }
         [HttpGet]
@@ -139,9 +139,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
                 return View(employee);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Deleting Employee Data");
             }
         }
         [HttpPost,ActionName("Delete")]
@@ -154,9 +154,9 @@ namespace MVC.EmployeePayroll.Controllers
                 ViewBag.Message = "Data Deleted Successfully".ToString();
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Deleting Employee Data");
             }
         }
         [HttpGet]
@@ -187,9 +187,9 @@ namespace MVC.EmployeePayroll.Controllers
                 
                 return View();                
             }
-            catch(Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Login");
             }
         }
         [HttpPost]
@@ -214,9 +214,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
                 return View(login);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Login");
             }
         }
 
@@ -240,9 +240,9 @@ namespace MVC.EmployeePayroll.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Login");
             }
         }
         [HttpGet]

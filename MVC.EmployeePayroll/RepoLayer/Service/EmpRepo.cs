@@ -40,9 +40,9 @@ namespace RepoLayer.Service
                 connection.Close();
                 return result;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Adding Employee Data");
             }
         }
         public IEnumerable<EmployeeModel> GetAllEmployees()
@@ -76,7 +76,7 @@ namespace RepoLayer.Service
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Exception Occured while Fetching All Employee Data");
             }
         }
         public EmployeeModel Update(EmployeeModel employee)
@@ -99,9 +99,9 @@ namespace RepoLayer.Service
                 connection.Close();
                 return employee;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Updating Employee Data");
             }
         }
         public EmployeeModel GetEmployeeData(int? employeeId)
@@ -127,9 +127,9 @@ namespace RepoLayer.Service
                 }
                 return employee;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Fetching Employee Data by EmployeeId");
             }
         }
         public void DeleteEmployee(int? employeeId)
@@ -144,9 +144,9 @@ namespace RepoLayer.Service
                 sqlCommand.ExecuteNonQuery();
                 connection.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Deleting Employee Data");
             }
         }
         //public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
@@ -184,9 +184,9 @@ namespace RepoLayer.Service
         //        }
         //        return employeeModel;
         //    }
-        //    catch(Exception ex)
+        //    catch(Exception)
         //    {
-        //        throw ex;
+        //        throw new Exception("Exception Occured while Loging");
         //    }
         //}
     }

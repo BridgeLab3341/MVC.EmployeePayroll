@@ -20,9 +20,9 @@ namespace BusinessLayer.Service
             {
                return this.empRepo.Create(employee);
             }
-            catch (Exception ) 
+            catch (Exception)
             {
-                throw ;
+                throw new Exception("Exception Occured while Adding Employee Data");
             }
         }
         public IEnumerable<EmployeeModel> GetAllEmployees()
@@ -33,7 +33,7 @@ namespace BusinessLayer.Service
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Exception Occured while Fetching All Employee Data");
             }
         }
         public EmployeeModel Update(EmployeeModel employee)
@@ -42,9 +42,9 @@ namespace BusinessLayer.Service
             {
                 return this.empRepo.Update(employee);
             }
-            catch (Exception )
+            catch (Exception)
             {
-                throw;
+                throw new Exception("Exception Occured while Updating Employee Data");
             }
         }
         public EmployeeModel GetEmployeeData(int? employeeId)
@@ -55,7 +55,7 @@ namespace BusinessLayer.Service
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Exception Occured while Fetching Employee Data by EmployeeId");
             }
         }
         public void DeleteEmployee(int? employeeId)
@@ -64,9 +64,9 @@ namespace BusinessLayer.Service
             {
                 this.empRepo.DeleteEmployee(employeeId);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Exception Occured while Deleting Employee Data");
             }
         }
         //public EmployeeModel LoginEmployee(EmployeeLoginModel loginModel)
@@ -75,9 +75,9 @@ namespace BusinessLayer.Service
         //    {
         //        return this.empRepo.LoginEmployee(loginModel);
         //    }
-        //    catch(Exception ex)
+        //    catch(Exception)
         //    {
-        //        throw ex;
+        //        throw new Exception("Exception Occured while Loging");
         //    }
         //}
     }
