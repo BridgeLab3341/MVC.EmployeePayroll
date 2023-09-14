@@ -31,6 +31,7 @@ namespace MVC.EmployeePayroll
             services.AddControllersWithViews();
             services.AddTransient<IEmpBusiness, EmpBusiness>();
             services.AddTransient<IEmpRepo, EmpRepo>();
+            //Session Management
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(120);
